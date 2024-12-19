@@ -1,6 +1,8 @@
 # Script-Tools
 Utility scripts that can be used as helper tools for various purposes
 
+### All of these script files should be saved or copied to, and then run from, the profile folder to be looked at.
+
 - **empty-config-finder.bat** - Searches through a Minecraft profile to help find and remove config files which may be corrupted.  Run it from th main profile folder.  
     ([**right click 'save link as' to download** / left click to view](https://raw.githubusercontent.com/CurseForgeCommunity/Script-Tools/main/files/empty-config-finder.bat))
 
