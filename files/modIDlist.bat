@@ -336,38 +336,6 @@ FOR /L %%t IN (0,1,!SERVERMODSCOUNT!) DO (
    )
 )
 
-GOTO :report
-:: END SCANNING OLD VERSION FILES
-
-GOTO :skipreplacefunction
-:: Function to replace strings within variable strings - hot stuff! - OG Version that needed TEMP as variable passed.
-:: :l_replace
-:: SET "TEMP=x%~1x"
-:: :l_replaceloop
-:: FOR /f "delims=%~2 tokens=1*" %%x IN ("!TEMP!") DO (
-:: IF "%%y"=="" set "TEMP=!TEMP:~1,-1!"&exit/b
-:: set "TEMP=%%x%~3%%y"
-:: )
-:: GOTO :l_replaceloop
-
-
-:: l_replace function - reworked to allow any variable name passed to alter.  Needs 4 paramters passed.
-:: 4 Paramters:  <variable to edit> <string to find> <replacement string> <variable to edit name>
-::
-:: EXAMPLE:      CALL :l_replace_ng "!TEMP!" "=" ";" "TEMP"
-
-:l_replace
-SET "%~4=x%~1x"
-:l_replaceloop
-FOR /f "delims=%~2 tokens=1*" %%x IN ("!%~4!") DO (
-IF "%%y"=="" SET "%~4=!%~4:~1,-1!" & EXIT /b
-SET "%~4=%%x%~3%%y"
-)
-GOTO :l_replaceloop
-
-:skipreplacefunction
-
-
 :report
 CLS
 
@@ -580,13 +548,13 @@ IF !RUNTYPE!==FAB (
    )
 )
 
-:: Finally, actually, echo the results to the console window.  This way all ECHO's above didn't need to be run twice!
-
+:: Finally, actually, echo the results to the console window!  This way all ECHO's above didn't need to be run twice!
 ECHO | TYPE "!REPORTNAME!.txt"
 
-
-
 PAUSE & EXIT [\B]
+
+
+:: FUNCTIONS
 
 :GetMaxStringLength
 :: Usage : GetMaxStringLength OutVariableName StringToBeMeasured
@@ -605,4 +573,29 @@ IF %MaxLength% GTR !%1! (
 )
 GOTO:EOF
 
-PAUSE
+
+:: FUNCTION TO REPLACE STRINGS WITHIN VARIABLE STRINGS - hot stuff!
+:: l_replace function - reworked to allow any variable name passed to alter.  Needs 4 paramters passed.
+:: 4 Paramters:  <variable to edit> <string to find> <replacement string> <variable to edit name>
+::
+:: EXAMPLE:      CALL :l_replace_ng "!TEMP!" "=" ";" "TEMP"
+
+:l_replace
+SET "%~4=x%~1x"
+:l_replaceloop
+FOR /f "delims=%~2 tokens=1*" %%x IN ("!%~4!") DO (
+IF "%%y"=="" SET "%~4=!%~4:~1,-1!" & EXIT /b
+SET "%~4=%%x%~3%%y"
+)
+GOTO :l_replaceloop
+
+
+:: OG l_replace Version that needed TEMP as variable passed.
+:: :l_replace
+:: SET "TEMP=x%~1x"
+:: :l_replaceloop
+:: FOR /f "delims=%~2 tokens=1*" %%x IN ("!TEMP!") DO (
+:: IF "%%y"=="" set "TEMP=!TEMP:~1,-1!"&exit/b
+:: set "TEMP=%%x%~3%%y"
+:: )
+:: GOTO :l_replaceloop
