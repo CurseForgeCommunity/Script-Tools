@@ -19,7 +19,7 @@ ECHO: & ECHO   MAKING LIST OF FILES - PLEASE WAIT... & ECHO:
   :: Goes to mods folder and gets file names lists.  FINDSTR prints only files with .jar found
   
 :: Creates list of all mod file names.  Sends the working dir to the mods folder and uses a loop and the 'dir' command to create an array list of file names.
-:: A For loop is used with delayedexpansion turned off with a funciton called to record each filename because this allows capturing
+:: A For loop is used with delayedexpansion turned off with a function called to record each filename because this allows capturing
 :: filenames with exclamation marks in the name.  eol=| ensures that filenames with some weird characters aren't ignored.
 SET SERVERMODSCOUNT=0
 PUSHD mods
@@ -52,7 +52,7 @@ IF NOT EXIST "minecraftinstance.json" GOTO :askmodloadertype
 
 ECHO   FOUND A CURSEFORGE minecraftinstance.json - USING IT TO SET PROFILE TYPE! & ECHO:
 
-REM Character escaping special characters that break the powershell calls below.  Please stop putting speical characters in names, thx.
+REM Character escaping special characters that break the powershell calls below.  Please stop putting special characters in names, thx.
 SET "THISLOC=%CD%"
 SET "THISLOC=!THISLOC:'=`'!"
 SET "THISLOC=!THISLOC:[=`[!"

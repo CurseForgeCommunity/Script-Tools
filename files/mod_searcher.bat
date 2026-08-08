@@ -28,7 +28,7 @@ CD "%CD%/mods"
 :: If it doesn't exist yet create a temp folder for holding temp files, and then extract contents of the JAR files out into txt files.
 IF NOT EXIST "%CD%/mod_searcher_working" MD mod_searcher_working
 
-:: Disalbing delayed expansion and sending to a function allows correctly using file names containing exlamation marks !
+:: Disalbing delayed expansion and sending to a function allows correctly using file names containing exclamation marks !
 setlocal enableextensions
 setlocal disabledelayedexpansion
 FOR %%i IN ("*.jar") DO (
@@ -46,7 +46,7 @@ GOTO :EOF
 
 PUSHD mod_searcher_working
 
-ECHO: & ECHO  %RANDOCOLOR% Prepartion done %black%
+ECHO: & ECHO  %RANDOCOLOR% Preparation done %black%
 :search_start
 ECHO: & ECHO: & ECHO:
 SET /p "SEARCHFOR=%RANDOCOLOR% Enter string to look for: %black%"
